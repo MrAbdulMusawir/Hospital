@@ -21,19 +21,25 @@ namespace Pharmacy.Controllers
         {
             try
             {
-            var supplierList = context.Suppliers.Select(x => new
-            {
-                ID = x.ID,
-                Name = x.Name,
-                Description = x.Description,
-                isActive = x.isActive
-            }).ToList();
+                searchSupplierDML();
             return this.Json(supplierList.ToDataSourceResult(request));
             }
             catch (Exception ex)
             {
                 return Json(ex.Message);
             }
+        }
+
+        private searchSupplierDML()
+        {
+             var supplierList = context.Suppliers.Select(x => new
+            {
+                ID = x.ID,
+                Name = x.Name,
+                Description = x.Description,
+                isActive = x.isActive
+            }).ToList();
+
         }
 
         public ActionResult AddSupplier()
@@ -47,7 +53,17 @@ namespace Pharmacy.Controllers
         {
             try
             {
-            Supplier obj = new Supplier();
+            return View();
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+        }
+
+        private ActionResult SupplierDML()
+        {
+                       Supplier obj = new Supplier();
 
             obj.Name = item.Name;
             obj.Description = item.Description;
@@ -57,12 +73,7 @@ namespace Pharmacy.Controllers
             context.SaveChanges();
 
             ModelState.Clear();
-            return View();
-            }
-            catch (Exception ex)
-            {
-                return Json(ex.Message);
-            }
+ 
         }
     }
 }
