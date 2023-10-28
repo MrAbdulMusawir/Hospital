@@ -254,14 +254,28 @@ namespace Pharmacy.Controllers
 
         public JsonResult ddlItemType()
         {
-            var itemTypeList = context.ItemTypes.Select(x => new { ID = x.ID, Name = x.Name }).ToList();
-            return Json(itemTypeList, JsonRequestBehavior.AllowGet);
+            try
+            {
+                var itemTypeList = context.ItemTypes.Select(x => new { ID = x.ID, Name = x.Name }).ToList();
+                return Json(itemTypeList, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         public JsonResult ddlCompanies()
         {
+            try
+            {
             var companiesList = context.Companies.Select(x => new { ID = x.ID, Name = x.Name }).ToList();
             return Json(companiesList, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         #endregion

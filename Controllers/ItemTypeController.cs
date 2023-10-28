@@ -19,6 +19,8 @@ namespace Pharmacy.Controllers
 
         public JsonResult GetTypeList([DataSourceRequest]DataSourceRequest request)
         {
+            try
+            {
             var itemTypes = context.ItemTypes.Select(x => new
             {
                 ID = x.ID,
@@ -27,6 +29,11 @@ namespace Pharmacy.Controllers
                 isActive = x.isActive
             }).ToList();
             return this.Json(itemTypes.ToDataSourceResult(request));
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         public ActionResult AddType()
@@ -38,6 +45,7 @@ namespace Pharmacy.Controllers
         [HttpPost]
         public ActionResult AddType(ItemTypeValidation item)
         {
+            try{
             ItemType obj = new ItemType();
 
             obj.Name = item.Name;
@@ -48,6 +56,11 @@ namespace Pharmacy.Controllers
             context.SaveChanges();
             ModelState.Clear();
             return View();
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
     }
