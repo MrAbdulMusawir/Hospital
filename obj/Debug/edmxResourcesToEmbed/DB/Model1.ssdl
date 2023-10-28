@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PharmacyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Logo" Type="image" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Address" Type="nvarchar" MaxLength="200" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="Item">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Barcode" Type="char" MaxLength="16" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="Description" Type="nvarchar" MaxLength="400" />
+    <Property Name="Shelf" Type="nvarchar" MaxLength="50" />
+    <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SalePrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PiecesPerPack" Type="int" />
+    <Property Name="SalePricePerPiece" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="OtherBonus" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="ManufacturerID" Type="int" />
+    <Property Name="ItemTypeID" Type="int" />
+    <Property Name="Packing" Type="nvarchar" MaxLength="50" />
+    <Property Name="PackSize" Type="int" />
+    <Property Name="GenericName" Type="nvarchar" MaxLength="60" />
+    <Property Name="PurchasePercentage" Type="int" />
+    <Property Name="SalePercentage" Type="int" />
+    <Property Name="TotalStock" Type="int" />
+    <Property Name="LooseQuantitySold" Type="int" />
+    <Property Name="SpecialDiscount" Type="int" />
+    <Property Name="StripPerPack" Type="int" />
+    <Property Name="TabPerStrip" Type="int" />
+    <Property Name="TotalItemPerPack" Type="int" StoreGeneratedPattern="Computed" />
+    <Property Name="LowStockQuantity" Type="int" />
+    <Property Name="CriticalLowStockQuantity" Type="int" />
+  </EntityType>
+  <EntityType Name="ItemType">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="isActive" Type="bit" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Purchase">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SupplierID" Type="int" />
+    <Property Name="DateOfSupply" Type="datetime" />
+    <Property Name="NetTotal" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="AmountPaid" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="Arears" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="PurchaseItems">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PurchaseID" Type="int" />
+    <Property Name="ItemID" Type="int" />
+    <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="SalePercentage" Type="int" />
+    <Property Name="PurchasePercentage" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="SalePrice" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="Sale">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="DateOfSale" Type="datetime" />
+    <Property Name="TotalBeforePercentage" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TotalAfterPercentage" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AmountPaid" Type="int" />
+    <Property Name="Arears" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SpecialDiscount" Type="int" />
+  </EntityType>
+  <EntityType Name="SaleItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SaleID" Type="int" />
+    <Property Name="ItemID" Type="int" />
+    <Property Name="SalePercentage" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="LoosePack" Type="char" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="SaleReturn">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="DateOfSaleReturn" Type="datetime" />
+    <Property Name="TotalBeforePercentage" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TotalAfterPercentage" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AmountPaid" Type="int" />
+    <Property Name="Arears" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SpecialDiscount" Type="int" />
+  </EntityType>
+  <EntityType Name="SaleReturnItem">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SaleReturnID" Type="int" />
+    <Property Name="ItemID" Type="int" />
+    <Property Name="SalePercentage" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="LoosePack" Type="char" MaxLength="2" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="50" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="isActive" Type="bit" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'Pharmacy.dbo.ItemSaleItemSale' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="ItemSaleItemSale">
+    <Key>
+      <PropertyRef Name="ID" />
+      <PropertyRef Name="Expr1" />
+      <PropertyRef Name="Expr2" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="200" />
+    <Property Name="Expr1" Type="int" Nullable="false" />
+    <Property Name="Expr2" Type="int" Nullable="false" />
+    <Property Name="DateOfSale" Type="datetime" />
+    <Property Name="TotalBeforePercentage" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TotalAfterPercentage" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AmountPaid" Type="int" />
+    <Property Name="Arears" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SalePercentage" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="ItemID" Type="int" />
+    <Property Name="SalePrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SpecialDiscount" Type="int" />
+  </EntityType>
+  <Association Name="FK_Item_Company">
+    <End Role="Company" Type="Self.Company" Multiplicity="0..1" />
+    <End Role="Item" Type="Self.Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="ManufacturerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Item_ItemType">
+    <End Role="ItemType" Type="Self.ItemType" Multiplicity="0..1" />
+    <End Role="Item" Type="Self.Item" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ItemType">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Item">
+        <PropertyRef Name="ItemTypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Purchase_Supplier">
+    <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+    <End Role="Purchase" Type="Self.Purchase" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Supplier">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Purchase">
+        <PropertyRef Name="SupplierID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PurchaseItems_Purchase">
+    <End Role="Purchase" Type="Self.Purchase" Multiplicity="0..1" />
+    <End Role="PurchaseItems" Type="Self.PurchaseItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Purchase">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PurchaseItems">
+        <PropertyRef Name="PurchaseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Sale_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="Sale" Type="Self.Sale" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Sale">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SaleItem_Sale">
+    <End Role="Sale" Type="Self.Sale" Multiplicity="0..1" />
+    <End Role="SaleItem" Type="Self.SaleItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Sale">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SaleItem">
+        <PropertyRef Name="SaleID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SaleReturn_Customer">
+    <End Role="Customer" Type="Self.Customer" Multiplicity="0..1" />
+    <End Role="SaleReturn" Type="Self.SaleReturn" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SaleReturn">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SaleReturnItem_SaleReturn">
+    <End Role="SaleReturn" Type="Self.SaleReturn" Multiplicity="0..1" />
+    <End Role="SaleReturnItem" Type="Self.SaleReturnItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SaleReturn">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SaleReturnItem">
+        <PropertyRef Name="SaleReturnID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PharmacyModelStoreContainer">
+    <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Item" EntityType="Self.Item" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ItemType" EntityType="Self.ItemType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PurchaseItems" EntityType="Self.PurchaseItems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sale" EntityType="Self.Sale" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SaleItem" EntityType="Self.SaleItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SaleReturn" EntityType="Self.SaleReturn" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SaleReturnItem" EntityType="Self.SaleReturnItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ItemSaleItemSale" EntityType="Self.ItemSaleItemSale" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [ItemSaleItemSale].[ID] AS [ID], 
+    [ItemSaleItemSale].[Name] AS [Name], 
+    [ItemSaleItemSale].[Expr1] AS [Expr1], 
+    [ItemSaleItemSale].[Expr2] AS [Expr2], 
+    [ItemSaleItemSale].[DateOfSale] AS [DateOfSale], 
+    [ItemSaleItemSale].[TotalBeforePercentage] AS [TotalBeforePercentage], 
+    [ItemSaleItemSale].[TotalAfterPercentage] AS [TotalAfterPercentage], 
+    [ItemSaleItemSale].[AmountPaid] AS [AmountPaid], 
+    [ItemSaleItemSale].[Arears] AS [Arears], 
+    [ItemSaleItemSale].[SalePercentage] AS [SalePercentage], 
+    [ItemSaleItemSale].[Quantity] AS [Quantity], 
+    [ItemSaleItemSale].[ItemID] AS [ItemID], 
+    [ItemSaleItemSale].[SalePrice] AS [SalePrice], 
+    [ItemSaleItemSale].[SpecialDiscount] AS [SpecialDiscount]
+    FROM [dbo].[ItemSaleItemSale] AS [ItemSaleItemSale]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="FK_Item_Company" Association="Self.FK_Item_Company">
+      <End Role="Company" EntitySet="Company" />
+      <End Role="Item" EntitySet="Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Item_ItemType" Association="Self.FK_Item_ItemType">
+      <End Role="ItemType" EntitySet="ItemType" />
+      <End Role="Item" EntitySet="Item" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Purchase_Supplier" Association="Self.FK_Purchase_Supplier">
+      <End Role="Supplier" EntitySet="Supplier" />
+      <End Role="Purchase" EntitySet="Purchase" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PurchaseItems_Purchase" Association="Self.FK_PurchaseItems_Purchase">
+      <End Role="Purchase" EntitySet="Purchase" />
+      <End Role="PurchaseItems" EntitySet="PurchaseItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Sale_Customer" Association="Self.FK_Sale_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="Sale" EntitySet="Sale" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SaleItem_Sale" Association="Self.FK_SaleItem_Sale">
+      <End Role="Sale" EntitySet="Sale" />
+      <End Role="SaleItem" EntitySet="SaleItem" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SaleReturn_Customer" Association="Self.FK_SaleReturn_Customer">
+      <End Role="Customer" EntitySet="Customer" />
+      <End Role="SaleReturn" EntitySet="SaleReturn" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SaleReturnItem_SaleReturn" Association="Self.FK_SaleReturnItem_SaleReturn">
+      <End Role="SaleReturn" EntitySet="SaleReturn" />
+      <End Role="SaleReturnItem" EntitySet="SaleReturnItem" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

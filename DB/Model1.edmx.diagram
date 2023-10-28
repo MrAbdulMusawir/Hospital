@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9eabf71066ab4fb68f71b444b278da93" Name="Diagram1">
+        <EntityTypeShape EntityType="PharmacyModel.Company" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PharmacyModel.Customer" Width="1.5" PointX="0.75" PointY="13.875" />
+        <EntityTypeShape EntityType="PharmacyModel.ItemType" Width="1.5" PointX="0.75" PointY="4" />
+        <EntityTypeShape EntityType="PharmacyModel.Purchase" Width="1.5" PointX="6" PointY="9.625" />
+        <EntityTypeShape EntityType="PharmacyModel.Supplier" Width="1.5" PointX="3.75" PointY="10" />
+        <AssociationConnector Association="PharmacyModel.FK_Purchase_Supplier" />
+        <EntityTypeShape EntityType="PharmacyModel.PurchaseItem" Width="1.5" PointX="8.25" PointY="5" />
+        <AssociationConnector Association="PharmacyModel.FK_PurchaseItems_Purchase" />
+        <EntityTypeShape EntityType="PharmacyModel.Sale" Width="1.5" PointX="3" PointY="13.5" />
+        <AssociationConnector Association="PharmacyModel.FK_Sale_Customer" />
+        <EntityTypeShape EntityType="PharmacyModel.ItemSaleItemSale" Width="1.5" PointX="0.75" PointY="6.75" />
+        <EntityTypeShape EntityType="PharmacyModel.SaleItem" Width="1.5" PointX="5.25" PointY="6.375" />
+        <AssociationConnector Association="PharmacyModel.FK_SaleItem_Sale" />
+        <EntityTypeShape EntityType="PharmacyModel.SaleReturn" Width="1.5" PointX="3" PointY="17.625" />
+        <EntityTypeShape EntityType="PharmacyModel.SaleReturnItem" Width="1.5" PointX="8.25" PointY="9.375" />
+        <AssociationConnector Association="PharmacyModel.FK_SaleReturn_Customer" />
+        <AssociationConnector Association="PharmacyModel.FK_SaleReturnItem_SaleReturn" />
+        <EntityTypeShape EntityType="PharmacyModel.Item" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="PharmacyModel.FK_Item_Company" />
+        <AssociationConnector Association="PharmacyModel.FK_Item_ItemType" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

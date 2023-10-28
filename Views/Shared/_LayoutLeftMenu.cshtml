@@ -1,0 +1,329 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Pharma Care | Dashboard</title>
+
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    @Scripts.Render("~/AdminLTE/js")
+
+
+    @*Note: Below script is added just b/c Kendo Filterable was not working with the jquery version 3.3.1*@
+    <script src="~/Scripts/Kendo/jquery-migrate-3.0.0.min.js"></script>
+
+    @Styles.Render("~/AdminLTE/css")
+
+</head>
+
+<body class="hold-transition skin-blue sidebar-mini">
+
+    <div class="wrapper">
+
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="index2.html" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>L/C</b></span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg">LifeCare</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                </a>
+
+                <div class="navbar-custom-menu">
+                    <ul class="nav navbar-nav">
+
+                        <li class="dropdown notifications-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-bell-o"></i>
+                                <span class="label label-warning" id="notificationLogo">14</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li class="header"></li>
+                                <li>
+                                    <!-- inner menu: contains the actual data -->
+                                    <ul class="menu">
+                                        <li>
+                                            <a href="#" class="text-green">
+                                                <i class="fa fa-dollar"></i> Today's Sale: <span class="badge" id="todayTotalSale">@ViewBag.totalSales</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("AlarmingStockItem","Item",new {ItemIntensity =  "LowStockItem"})" class="text-yellow">
+                                                <i class="fa fa-warning"></i> Low Stock Items: <span class="badge" id="totalLowStockItems">@ViewBag.TotalLowStockItems</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="@Url.Action("AlarmingStockItem","Item",new { ItemIntensity = "CriticalLowStockItem"})" class="text-red">
+                                                <i class="fa fa-exclamation-triangle"></i> Critical Low Stock Items: <span class="badge" id="totalCriticalLowStockItems">@ViewBag.TotalCriticalLowStockItems</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="text-green">
+                                                <i class="fa fa-shopping-cart text-green"></i> Sales made are: <span class="badge">95</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                @*<i class="fa fa-money text-blue"></i> You changed your username*@
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="footer"><a href="#">View all</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="dropdown user user-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                <img src="~/Pharma image/pharma1.jpg" class="img-circle" width="35" height="20" alt="User Image" />
+                                <span class="hidden-xs">Ajmal Shah Kashif</span>
+                            </a>
+
+                            <ul class="dropdown-menu">
+
+                                <li class="user-header" style="height:200px">
+                                    <img src="~/Pharma image/pharma1.jpg" class="img-circle" alt="User Image" />
+
+                                    <p>
+                                        Ajmal Shah Kashif
+                                    </p>
+                                    <p>
+                                        Associate Software Engineer<small>Member since Nov. 2016</small>
+                                    </p>
+
+                                </li>
+
+                                <li class="user-footer">
+                                    <div class="pull-left">
+                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                    </div>
+                                    <div class="pull-right">
+                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                    </div>
+                                </li>
+                            </ul>
+
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <aside class="main-sidebar">
+
+            <section class="sidebar">
+
+                <form action="#" method="get" class="sidebar-form">
+                    <div class="input-group">
+                        <input type="text" name="q" class="form-control" placeholder="Search...">
+                        <span class="input-group-btn">
+                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
+                    </div>
+                </form>
+
+                <ul class="sidebar-menu" data-widget="tree">
+                    <li class="header">MAIN NAVIGATION</li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li class="active"><a href="index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+                            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-folder"></i> <span>Examples</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="pages/examples/invoice.html"><i class="fa fa-circle-o"></i> Item</a></li>
+                            <li><a href="pages/examples/invoice.html"><i class="fa fa-circle-o"></i> Invoice</a></li>
+                            <li><a href="pages/examples/profile.html"><i class="fa fa-circle-o"></i> Profile</a></li>
+                            <li><a href="pages/examples/login.html"><i class="fa fa-circle-o"></i> Login</a></li>
+                            <li><a href="pages/examples/pace.html"><i class="fa fa-circle-o"></i> Pace Page</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-folder"></i> <span>Items</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("AllItems","Item")"><i class="fa fa-circle-o"></i> All Items</a></li>
+                            <li><a href="@Url.Action("AddItem","Item")"><i class="fa fa-circle-o"></i> Add New Item</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="active treeview">
+                        <a href="#">
+                            <i class="fa fa-folder"></i> <span>Sale</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("AllSales","Sale")"><i class="fa fa-circle-o"></i> All Sales</a></li>
+                            <li><a href="@Url.Action("AddSale","Sale")"><i class="fa fa-circle-o"></i> New Sale</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-folder"></i> <span>Purchase</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("AllPurchases","Purchase")"><i class="fa fa-circle-o"></i> All Purchases</a></li>
+                            <li><a href="@Url.Action("AddPurchase","Purchase")"><i class="fa fa-circle-o"></i> New Purchase</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-folder"></i> <span>Return</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("AddSaleReturn","SaleReturn")"><i class="fa fa-circle-o"></i> Sale Return</a></li>
+                            <li><a href="@Url.Action("","")"><i class="fa fa-circle-o"></i> Purchase Return</a></li>
+                            <li><a href="@Url.Action("","")"><i class="fa fa-circle-o"></i> All Sales Return</a></li>
+                            <li><a href="@Url.Action("","")"><i class="fa fa-circle-o"></i> All Purchases Return</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-folder"></i> <span>Report</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("AddSaleReturn","SaleReturn")"><i class="fa fa-circle-o"></i> Sale Report</a></li>
+                            <li><a href="@Url.Action("","")"><i class="fa fa-circle-o"></i> Purchase Report</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-folder"></i> <span>Companies/Brands</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("AllCompanies","Company")"><i class="fa fa-circle-o"></i> All Companies</a></li>
+                            <li><a href="@Url.Action("AddCompany","Company")"><i class="fa fa-circle-o"></i> Add New Company</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-folder"></i> <span>Item Type/Categories</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("AllTypes","ItemType")"><i class="fa fa-circle-o"></i> All Type/Categories</a></li>
+                            <li><a href="@Url.Action("AddType","ItemType")"><i class="fa fa-circle-o"></i> Add New Type</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-folder"></i> <span>Supplier</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("AllSuppliers","Supplier")"><i class="fa fa-circle-o"></i> All Suppliers</a></li>
+                            <li><a href="@Url.Action("AddSupplier","Supplier")"><i class="fa fa-circle-o"></i> Add New Supplier</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-folder"></i> <span>Miscellaneous</span>
+                            <span class="pull-right-container">
+                                <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li><a href="@Url.Action("AlarmingStockItem","Item",new {ItemIntensity =  "LowStockItem"})"><i class="fa fa-circle-o"></i> Low Stock Items</a></li>
+                            <li><a href="@Url.Action("AlarmingStockItem","Item",new { ItemIntensity = "CriticalLowStockItem" })"><i class="fa fa-circle-o"></i> Critical Low Stock Items</a></li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </section>
+
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+
+        <div class="content-wrapper">
+
+            <section class="content">
+
+                <div class="row">
+                    <div class="col-lg-12 col-xs-11">
+                        @RenderBody()
+                    </div>
+
+
+                </div>
+
+            </section>
+
+        </div>
+
+
+
+        <footer class="main-footer">
+            <div class="pull-right hidden-xs">
+                <b>Version</b> 2.4.13
+            </div>
+            <strong>Copyright &copy; 2014-2019 <a href="https://www.linkedin.com/in/ajmalshahkashif/">Ajmal Shah</a>.</strong> All rights
+            reserved.
+        </footer>
+
+
+    </div>
+
+
+
+
+    @*<script>$.widget.bridge('uibutton', $.ui.button);</script>*@
+
+
+</body>
+</html>
