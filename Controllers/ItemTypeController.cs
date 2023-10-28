@@ -34,6 +34,7 @@ namespace Pharmacy.Controllers
             }
         }
 
+        [HttpGet]
         public ActionResult AddType()
         {
 
