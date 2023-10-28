@@ -94,8 +94,10 @@ namespace Pharmacy.Controllers
             if (item != null)
             {
                 var itemToDelete = context.Items.Where(x => x.ID == item.ID).FirstOrDefault();
-                context.Items.Remove(itemToDelete);
-                context.SaveChanges();
+                if(itemToDelete != null || itemToDelete != ''){
+                    context.Items.Remove(itemToDelete);
+                    context.SaveChanges();
+                }
             }
             return Json("Item with ID = " + item.ID + " And name = " + item.Name + " is deleted");
         }
