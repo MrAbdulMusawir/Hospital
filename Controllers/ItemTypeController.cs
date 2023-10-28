@@ -1,6 +1,4 @@
-﻿using Kendo.Mvc.Extensions;
-using Kendo.Mvc.UI;
-using Pharmacy.DB;
+﻿using Pharmacy.DB;
 using Pharmacy.Models;
 using System;
 using System.Collections.Generic;
