@@ -14,9 +14,16 @@ namespace Pharmacy.Controllers
     {
         public ActionResult AllSaleReturn()
         {
+            try
+            {
             var saleReturnList = context.SaleReturns.ToList();
 
             return View(saleReturnList);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         [HttpGet]
@@ -33,6 +40,9 @@ namespace Pharmacy.Controllers
 
         public JsonResult MedicineList(string Prefix)
         {
+            try
+            {
+             
             var AllItems = context.Items.Select(x => new { ID = x.ID, Name = x.Name }).ToList();
             var ItemList = AllItems.Where(x => x.Name.StartsWith(Prefix, StringComparison.OrdinalIgnoreCase)).Select(x => new { Name = x.Name, ID = x.ID }).ToList();
             //var ItemList = AllItems.Where(x => x.Name.StartsWith(Prefix, StringComparison.OrdinalIgnoreCase)).Select(x => new { Name = x.Name, ID = x.ID }).ToList();
@@ -40,10 +50,17 @@ namespace Pharmacy.Controllers
             //var ItemList = context.Items.Where(x => x.Name.Contains(Prefix)).Select(x => new { Name = x.Name, ID = x.ID }).ToList();
 
             return Json(ItemList, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         public JsonResult GetItemByID(int? itemID)
         {
+            try
+            {
             var item = context.Items.Where(x => x.ID == itemID).Select(x => new
             {
                 ID = x.ID,
@@ -55,11 +72,18 @@ namespace Pharmacy.Controllers
                 PiecesPerPack = x.PiecesPerPack
             }).FirstOrDefault();
             return Json(item, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         [HttpPost]
         public JsonResult SaveSaleItems(List<SaleReturnValidation> saleReturn)
         {
+            try
+            {
             SaleReturn newSaleReturn = new SaleReturn();
 
             newSaleReturn.TotalBeforePercentage = saleReturn.Select(x => x.TotalBeforePercentage).FirstOrDefault();
@@ -111,10 +135,17 @@ namespace Pharmacy.Controllers
             }
 
             return Json(true);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         public JsonResult GetSaleList([DataSourceRequest]DataSourceRequest request)
         {
+            try
+            {
             var saleReturnList = context.SaleReturns.Select(x => new
             {
                 ID = x.ID,
@@ -126,6 +157,11 @@ namespace Pharmacy.Controllers
                 Arears = x.Arears
             }).ToList();
             return this.Json(saleReturnList.ToDataSourceResult(request));
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         [HttpPost]

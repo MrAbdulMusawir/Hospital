@@ -26,8 +26,16 @@ namespace Pharmacy.Controllers
 
         public ActionResult AllPurchases()
         {
+            try
+            {
             var purchaseList = context.Purchases.ToList();
             return View(purchaseList);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
+
         }
 
         public ActionResult AddPurchase()
@@ -38,6 +46,8 @@ namespace Pharmacy.Controllers
 
         public JsonResult MedicineList(string Prefix)
         {
+            try
+            {
             var AllItems = context.Items.Select(x => new { ID = x.ID, Name = x.Name }).ToList();
             var ItemList = AllItems.Where(x => x.Name.StartsWith(Prefix, StringComparison.OrdinalIgnoreCase)).Select(x => new { Name = x.Name, ID = x.ID }).ToList();
             //var ItemList = AllItems.Where(x => x.Name.StartsWith(Prefix, StringComparison.OrdinalIgnoreCase)).Select(x => new { Name = x.Name, ID = x.ID }).ToList();
@@ -45,13 +55,25 @@ namespace Pharmacy.Controllers
             //var ItemList = context.Items.Where(x => x.Name.Contains(Prefix)).Select(x => new { Name = x.Name, ID = x.ID }).ToList();
 
             return Json(ItemList, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
 
         }
 
         public JsonResult SupplierList(string Prefix)
         {
+            try
+            {
             var SupplierList = context.Suppliers.Where(x => x.Name.StartsWith(Prefix)).Select(x => new { Name = x.Name, ID = x.ID }).ToList();
             return Json(SupplierList, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         public JsonResult GetItemByID(int? itemID)

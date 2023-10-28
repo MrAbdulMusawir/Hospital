@@ -46,6 +46,8 @@ namespace Pharmacy.Controllers
 
         public JsonResult MedicineList(string Prefix)
         {
+            try
+            {
             var AllItems = context.Items.Select(x => new { ID = x.ID, Name = x.Name }).ToList();
             var ItemList = AllItems.Where(x => x.Name.StartsWith(Prefix, StringComparison.OrdinalIgnoreCase)).Select(x => new { Name = x.Name, ID = x.ID }).ToList();
             //var ItemList = AllItems.Where(x => x.Name.StartsWith(Prefix, StringComparison.OrdinalIgnoreCase)).Select(x => new { Name = x.Name, ID = x.ID }).ToList();
@@ -53,10 +55,17 @@ namespace Pharmacy.Controllers
             //var ItemList = context.Items.Where(x => x.Name.Contains(Prefix)).Select(x => new { Name = x.Name, ID = x.ID }).ToList();
 
             return Json(ItemList, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         public JsonResult GetItemByID(int? itemID)
         {
+            try
+            {
             var item = context.Items.Where(x => x.ID == itemID).Select(x => new
             {
                 ID = x.ID,
@@ -68,10 +77,17 @@ namespace Pharmacy.Controllers
                 PiecesPerPack = x.PiecesPerPack
             }).FirstOrDefault();
             return Json(item, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         public JsonResult GetItemByBarCode(string barCode)
         {
+            try
+            {
             var item = context.Items.Where(x => x.Barcode == barCode).Select(x => new
             {
                 ID = x.ID,
@@ -84,12 +100,19 @@ namespace Pharmacy.Controllers
                 PiecesPerPack = x.PiecesPerPack
             }).FirstOrDefault();
             return Json(item, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
 
         [HttpPost]
         public JsonResult SaveSaleItems(List<SaleValidation> sale)
         {
+            try
+            {
             Sale newSale = new Sale();
 
             newSale.TotalBeforePercentage = sale.Select(x => x.TotalBeforePercentage).FirstOrDefault();
@@ -142,10 +165,17 @@ namespace Pharmacy.Controllers
             }
 
             return Json(true);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         public JsonResult GetSaleList([DataSourceRequest]DataSourceRequest request)
         {
+            try
+            {
             var saleList = context.Sales.Select(x => new
             {
                 ID = x.ID,
@@ -157,11 +187,18 @@ namespace Pharmacy.Controllers
                 Arears = x.Arears
             }).ToList();
             return this.Json(saleList.ToDataSourceResult(request));
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         [HttpPost]
         public JsonResult GetItemTypeName(int? ItemTypeID)
         {
+            try
+            {
             var item = context.ItemTypes.Where(x => x.ID == ItemTypeID).Select(x => new
             {
                 ID = x.ID,
@@ -170,6 +207,11 @@ namespace Pharmacy.Controllers
 
             }).FirstOrDefault();
             return Json(item, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         #region Print Code
