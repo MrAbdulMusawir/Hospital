@@ -19,6 +19,8 @@ namespace Pharmacy.Controllers
 
         public JsonResult GetSupplierList([DataSourceRequest]DataSourceRequest request)
         {
+            try
+            {
             var supplierList = context.Suppliers.Select(x => new
             {
                 ID = x.ID,
@@ -27,6 +29,11 @@ namespace Pharmacy.Controllers
                 isActive = x.isActive
             }).ToList();
             return this.Json(supplierList.ToDataSourceResult(request));
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         public ActionResult AddSupplier()
@@ -38,6 +45,8 @@ namespace Pharmacy.Controllers
         [HttpPost]
         public ActionResult AddSupplier(SupplierValidation item)
         {
+            try
+            {
             Supplier obj = new Supplier();
 
             obj.Name = item.Name;
@@ -49,6 +58,11 @@ namespace Pharmacy.Controllers
 
             ModelState.Clear();
             return View();
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
     }
 }
