@@ -171,7 +171,8 @@ namespace Pharmacy.Controllers
 
         public ActionResult AlarmingStockItem(string ItemIntensity)
         {
-            ViewBag.ItemIntensity = ItemIntensity;
+            if(ItemIntensity != null || ItemIntensity != '')
+                ViewBag.ItemIntensity = ItemIntensity;
             return View();
         }
 
