@@ -156,10 +156,17 @@ namespace Pharmacy.Controllers
             obj.LooseQuantitySold = 0;
             obj.PiecesPerPack = item.PiecesPerPack;
 
-            context.Items.Add(obj);
-            context.SaveChanges();
-            ModelState.Clear();
-            return View();
+            try
+            {
+                context.Items.Add(obj);
+                context.SaveChanges();
+                ModelState.Clear();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                return Json(ex.Message);
+            }
         }
 
         public ActionResult AlarmingStockItem(string ItemIntensity)
